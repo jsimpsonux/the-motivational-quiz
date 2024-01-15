@@ -2,7 +2,8 @@ const startButton = document.getElementById('start');
 const eachQuestion = document.getElementById('question-title');
 const answerChoices = document.getElementById('choices');
 const timerElement = document.getElementById('time');
-const hideRemove = document.getElementById('hide');
+const hideRemove = document.getElementById('questions');
+const startScreen = document.getElementById('start-screen')
 
 
 var hasWon = false;
@@ -24,17 +25,17 @@ function Timer() {
             clearInterval(timer);
             loseGame();
         }
-    }, 1000);
+    }, 75 * 1000);
 }
 
 var currentQuestion = 0;
 
 function displayQuestions(){
     const question = quizQuestions[currentQuestion];
-    eachQuestion.textContent = quizQuestions.question;
+    eachQuestion.textContent = question.question;
 
     answerChoices.innerHTML = '';
-    question.answers[0].forEach((answers, index) => {
+    question.answers.forEach((answers, index) => {
         const optionButton = document.createElement('button');
         optionButton.textContent = answers;
         optionButton.classList.add('option');
@@ -45,13 +46,35 @@ function displayQuestions(){
 
 // console.log(quizQuestions.answers[0]);
 
+var myScore = 0;
+
+function checkAnswer(selectedAnswer) {
+    const question = question[currentQuestion];
+    if (selectedAnswer === quizQuestion.correctAnswer){
+        myScore++;
+    } else if (selectedAnswer !== question.correctAnswer) {
+        timerCount - 10000;
+    }
+
+    currentQuestion++;
+    if (currentQuestion < question.length) {
+        displayQuestions();
+    } else {
+        showResults();
+    }
+}
+
+function showResults(){
+    eachQuestion.textContent
+}
 
 function start(){
     hasWon = false;
     startButton.disabled = true;
     Timer();
     displayQuestions();
-    hideRemove.classList.remove;
+    hideRemove.classList.remove('hide');
+    startScreen.classList.remove('start');
 
 
 }
