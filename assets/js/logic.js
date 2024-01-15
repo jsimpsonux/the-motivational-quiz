@@ -50,7 +50,7 @@ function start(){
     hasWon = false;
     startButton.disabled = true;
     Timer();
-    displayQustions();
+    displayQuestions();
     hideRemove.classList.remove;
 
 
