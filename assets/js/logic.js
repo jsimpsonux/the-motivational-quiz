@@ -29,13 +29,14 @@ function Timer() {
 }
 
 var currentQuestion = 0;
+var question = quizQuestions[currentQuestion];
 
 function displayQuestions(){
-    const question = quizQuestions[currentQuestion];
-    eachQuestion.textContent = question.question;
+    console.log(question);
+    eachQuestion.textContent = quizQuestions[currentQuestion].question;
 
     answerChoices.innerHTML = '';
-    question.answers.forEach((answers, index) => {
+    quizQuestions[currentQuestion].answers.forEach((answers, index) => {
         const optionButton = document.createElement('button');
         optionButton.textContent = answers;
         optionButton.classList.add('option');
@@ -49,24 +50,27 @@ function displayQuestions(){
 var myScore = 0;
 
 function checkAnswer(selectedAnswer) {
-    const question = question[currentQuestion];
-    if (selectedAnswer === quizQuestion.correctAnswer){
+    console.log("inside checkAnswer function");
+    if (question.answers[selectedAnswer] === question.correctAnswer){
+        console.log("Inside the first if statement");
         myScore++;
-    } else if (selectedAnswer !== question.correctAnswer) {
-        timerCount - 10000;
-    }
-
-    currentQuestion++;
-    if (currentQuestion < question.length) {
+        currentQuestion++;
+        console.log("You are here");
         displayQuestions();
-    } else {
-        showResults();
+    } else if (question.answers[selectedAnswer] !== question.correctAnswer) {
+        timerCount - 10000;
+        currentQuestion++;
+        displayQuestions();
     }
+
+    // currentQuestion++;
+    // if (currentQuestion < question.length) {
+    //     displayQuestions();
+    // } else {
+    //     showResults();
+    // }
 }
 
-function showResults(){
-    eachQuestion.textContent
-}
 
 function start(){
     hasWon = false;
